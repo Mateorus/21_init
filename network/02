@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ifconfig en0
+printf "a: " && ifconfig en0 inet | sed -n 's/.*broadcast //p'
+printf "b:\n" && ifconfig en0 | egrep -o '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'

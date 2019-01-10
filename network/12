@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ifconfig en0 inet | grep inet |cut -f 2 -d ' '
