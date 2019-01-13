@@ -1,0 +1,4 @@
+#!/bin/bash
+
+killall -u $ACTIVE
+userdel -f $ACTIVE
