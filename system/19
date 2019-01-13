@@ -1,0 +1,1 @@
+for i in /etc/rc*.d/S*; do basename $i | sed -r "s/^S[0-9]+//"; done |sort | uniq

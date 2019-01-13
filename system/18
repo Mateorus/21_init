@@ -1,0 +1,1 @@
+kill $(systemctl status ssh | grep "Main PID" | cut -f 4 -d ' ')
