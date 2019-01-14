@@ -1,0 +1,20 @@
+#!/bin/bash
+# Little script that delete files with identical content in current directory.
+
+for i in ./*
+do
+	if [ $i = $0 ]; then
+		continue
+	fi
+ 	for j in ./*
+ 	do
+		if [ $j = $0 ] || [ $j = $i ]; then
+			continue
+		fi
+		diff $i $j > /dev/null 2>&1
+		error=$?
+		if [ $error -eq 0 ]; then
+			rm -f $i
+		fi
+	done
+done
