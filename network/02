@@ -1,5 +1,15 @@
 #!/bin/bash
 
-ifconfig en0
-printf "a: " && ifconfig en0 inet | sed -n 's/.*broadcast //p'
-printf "b:\n" && ifconfig en0 | egrep -o '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'
+BROADCAST=$(ifconfig en0 inet | sed -n 's/.*broadcast //p')
+printf "a: $BROADCAST\n"
+NETMASK=$(ifconfig en0 | sed -n 's/.*netmask//p' | cut -f 2 -d ' ') 
+INDEX=0
+while [ $NETMASK != 0 ]; do
+	if [ $((NETMASK & 1)) != 0 ]
+	then
+		((INDEX++))
+	fi
+	NETMASK=$((NETMASK >> 1))
+done
+printf "b: \n"
+nmap -n -sL $BROADCAST/$INDEX | grep "Nmap scan report" | cut -f 5 -d ' '

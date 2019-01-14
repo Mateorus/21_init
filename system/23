@@ -1,0 +1,5 @@
+With graphic session:
+Just choose proper user after booting the system
+
+With ssh:
+ssh username@domainname
